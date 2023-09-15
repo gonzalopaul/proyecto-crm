@@ -1,6 +1,4 @@
-Requerimientos del software a elaborar
-
-Para desarrollar un CRM (Customer Relationship Management) para una empresa pequeña que se dedica a comerciar y distribuir cigarrillos electrónicos al por mayor, es importante considerar las necesidades específicas de esta empresa. Aquí tienes una lista de las partes clave que deberían desarrollarse en el CRM:
+Requerimientos del software a elaborar:
 
 1. **Gestión de Contactos y Clientes:**
    - Registro y almacenamiento de información de contacto de los clientes.
@@ -28,12 +26,12 @@ Para desarrollar un CRM (Customer Relationship Management) para una empresa pequ
    - Registro de respuestas de clientes a campañas de marketing.
 
 6. **Servicio de Atención al Cliente:**
-   - Registro de solicitudes y consultas de clientes.
+   - Registro de solicitudes y consultas de clientes vía WhatsApp.
    - Asignación de tickets a representantes de servicio al cliente.
    - Seguimiento de resolución de problemas y tiempos de respuesta.
 
 7. **Análisis y Reporting:**
-   - Generación de informes sobre ventas, inventario, rendimiento del equipo de ventas y marketing.
+   - Generación de informes sobre ventas e inventario.
    - Análisis de tendencias y métricas clave.
    - Visualización de datos para tomar decisiones informadas.
 
@@ -55,5 +53,3 @@ Para desarrollar un CRM (Customer Relationship Management) para una empresa pequ
 
 12. **Integración con Sistemas Externos:**
     - Integración con sistemas de contabilidad, sistemas de gestión de almacenes u otros sistemas relevantes.
-
-Es importante tener en cuenta que el desarrollo de un CRM debe ser escalable y adaptable a medida que la empresa crezca. Además, se debe diseñar pensando en la facilidad de uso para que los empleados puedan adoptarlo con éxito en sus actividades diarias.
