@@ -1,2 +1,59 @@
 Requerimientos del software a elaborar
 
+Para desarrollar un CRM (Customer Relationship Management) para una empresa pequeña que se dedica a comerciar y distribuir cigarrillos electrónicos al por mayor, es importante considerar las necesidades específicas de esta empresa. Aquí tienes una lista de las partes clave que deberían desarrollarse en el CRM:
+
+1. **Gestión de Contactos y Clientes:**
+   - Registro y almacenamiento de información de contacto de los clientes.
+   - Historial de interacciones con clientes, incluyendo llamadas, correos electrónicos y reuniones.
+   - Seguimiento de cuentas y empresas a las que se distribuyen los productos.
+
+2. **Gestión de Pedidos:**
+   - Registro de pedidos de productos por parte de los clientes.
+   - Seguimiento del estado de los pedidos, desde la solicitud hasta la entrega.
+   - Generación de facturas y seguimiento de pagos.
+
+3. **Inventario de Productos:**
+   - Registro y seguimiento de los productos disponibles en el inventario.
+   - Gestión de niveles de stock y reabastecimiento automático.
+   - Asociación de productos con clientes y pedidos.
+
+4. **Seguimiento de Ventas y Oportunidades:**
+   - Registro de oportunidades de venta y su estado.
+   - Seguimiento de las conversiones de oportunidades en pedidos.
+   - Análisis de ventas y generación de informes.
+
+5. **Automatización de Marketing:**
+   - Segmentación de clientes para campañas de marketing específicas.
+   - Automatización de correos electrónicos promocionales y seguimiento de tasas de apertura y clics.
+   - Registro de respuestas de clientes a campañas de marketing.
+
+6. **Servicio de Atención al Cliente:**
+   - Registro de solicitudes y consultas de clientes.
+   - Asignación de tickets a representantes de servicio al cliente.
+   - Seguimiento de resolución de problemas y tiempos de respuesta.
+
+7. **Análisis y Reporting:**
+   - Generación de informes sobre ventas, inventario, rendimiento del equipo de ventas y marketing.
+   - Análisis de tendencias y métricas clave.
+   - Visualización de datos para tomar decisiones informadas.
+
+8. **Integración con Comunicaciones:**
+   - Integración con sistemas de correo electrónico para el seguimiento de comunicaciones.
+   - Registro de llamadas telefónicas y seguimiento de interacciones por teléfono.
+   
+9. **Seguridad y Privacidad de Datos:**
+   - Implementación de medidas de seguridad para proteger la información sensible de los clientes.
+   - Cumplimiento de regulaciones de privacidad de datos aplicables.
+
+10. **Personalización y Adaptación:**
+    - Capacidad de personalizar la interfaz y los campos de datos según las necesidades de la empresa.
+    - Configuración de flujos de trabajo y notificaciones personalizadas.
+
+11. **Capacitación y Soporte:**
+    - Ofrecer capacitación a los usuarios internos para garantizar un uso efectivo del CRM.
+    - Proporcionar soporte técnico continuo para resolver problemas y dudas.
+
+12. **Integración con Sistemas Externos:**
+    - Integración con sistemas de contabilidad, sistemas de gestión de almacenes u otros sistemas relevantes.
+
+Es importante tener en cuenta que el desarrollo de un CRM debe ser escalable y adaptable a medida que la empresa crezca. Además, se debe diseñar pensando en la facilidad de uso para que los empleados puedan adoptarlo con éxito en sus actividades diarias.
