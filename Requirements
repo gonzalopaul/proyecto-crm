@@ -25,31 +25,13 @@ Requerimientos del software a elaborar:
    - Automatización de correos electrónicos promocionales y seguimiento de tasas de apertura y clics.
    - Registro de respuestas de clientes a campañas de marketing.
 
-6. **Servicio de Atención al Cliente:**
-   - Registro de solicitudes y consultas de clientes vía WhatsApp.
-   - Asignación de tickets a representantes de servicio al cliente.
-   - Seguimiento de resolución de problemas y tiempos de respuesta.
-
-7. **Análisis y Reporting:**
-   - Generación de informes sobre ventas e inventario.
-   - Análisis de tendencias y métricas clave.
-   - Visualización de datos para tomar decisiones informadas.
-
-8. **Integración con Comunicaciones:**
+6. **Integración con Comunicaciones:**
    - Integración con sistemas de correo electrónico para el seguimiento de comunicaciones.
    - Registro de llamadas telefónicas y seguimiento de interacciones por teléfono.
    
-9. **Seguridad y Privacidad de Datos:**
+7. **Seguridad y Privacidad de Datos:**
    - Implementación de medidas de seguridad para proteger la información sensible de los clientes.
    - Cumplimiento de regulaciones de privacidad de datos aplicables.
 
-10. **Personalización y Adaptación:**
-    - Capacidad de personalizar la interfaz y los campos de datos según las necesidades de la empresa.
-    - Configuración de flujos de trabajo y notificaciones personalizadas.
-
-11. **Capacitación y Soporte:**
-    - Ofrecer capacitación a los usuarios internos para garantizar un uso efectivo del CRM.
-    - Proporcionar soporte técnico continuo para resolver problemas y dudas.
-
-12. **Integración con Sistemas Externos:**
+8. **Integración con Sistemas Externos:**
     - Integración con sistemas de contabilidad, sistemas de gestión de almacenes u otros sistemas relevantes.
