@@ -9,7 +9,7 @@ def register(request):
         
         if form.is_valid():
             form.save()
-            return redirect('dashboard-index')
+            return redirect('user-login')
         
     else:
         form = CreateUserForm()
