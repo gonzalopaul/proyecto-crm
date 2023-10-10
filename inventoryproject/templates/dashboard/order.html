@@ -27,12 +27,8 @@
                             <td>{{ orders.product }}</td>
                             <td>{{ orders.product.category }}</td>
                             <td>{{ orders.order_quantity }}</td>
-                            <td>
-                                {{ orders.staff.username }}
-                            </td>
-                            <td>
-                                {{ orders.date }}
-                            </td>
+                            <td>{{ orders.staff.username }}</td>
+                            <td>{{ orders.date }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
