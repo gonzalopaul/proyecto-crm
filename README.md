@@ -14,4 +14,5 @@ Repositorio dedicado a la elaboración de un Sistema de Gestión de Relaciones c
 pip3 install crispy-bootstrap4
 pip3 install django-crispy-forms
 python3 manage.py runserver
+python -m pip install Pillow
 ```
