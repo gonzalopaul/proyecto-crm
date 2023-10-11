@@ -82,6 +82,14 @@ def product(request):
     }
     return render(request, 'dashboard/product.html', context)
 
+
+def product_staff(request):
+    items = Product.objects.all()
+
+    context = {
+        'items': items,
+    }
+    return render(request, 'dashboard/product_staff.html', context)
 @login_required
 def product_delete(request, pk):
     item = Product.objects.get(id=pk)
