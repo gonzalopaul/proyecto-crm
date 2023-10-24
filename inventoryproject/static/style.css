@@ -1,8 +1,28 @@
 body{
-    background: rgb(230, 227, 227);
+    background: rgb(255, 255, 255);
+    background-image: url('./../media/background/2.jpeg');
 }
 
 .my-card:hover{
     transform: scale(1.1);
     transition: 0.2s ease-in-out;
 }
+
+.bg-white{
+    text-align: center;
+    border: 2px solid #000;
+    padding: 20px;
+    }
+
+.card-header{
+    text-align: center;
+    border: 2px solid #000;
+    padding: 20px;
+    }
+
+.card-body{
+    text-align: center;
+    border: 2px solid #000;
+    padding: 20px;
+    }
+    
