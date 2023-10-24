@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Caompatible" content="ie=edge">
+    <title>Contacto</title>
+    <!--css-->
+	<link rel="stylesheet" href="../css/style.css">
+	<!--css para carousel-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff"> 
+    <!--Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=League Spartan' rel='stylesheet'>
+</head>
+
+<body>
+    <header>
+		<div class = "header">
+			<a href="../index.html"><h1>Solopods</h1></a>
+		</div>
+		<div class = "topnav">
+				<a href="../paginas/productos.html">Productos</a>
+				<a href="../paginas/servicios.html">Servicios</a>
+				<a href="../paginas/colaboraciones.html">Colaboraciones</a>
+                <a href="../paginas/contacto.html">Contacto</a>
+                <a href="http://127.0.0.1:8000/">Login</a>
+		</div>
+	</header>
+
+    <div class="contacto">
+        <h5 style="text-align: center; font-family: League Spartan;">Dejanos un mensaje con tu consulta. Nos pondremos en contacto contigo a través del correo solopods@noreply.es. ¡Esperamos colaborar pronto!</h5>
+        <form action="#" method="post">
+            <div class="contactForm">
+                <label for="tipo">Particular o empresa:</label>
+                <select name="tipo" id="tipo">
+                   <option value="particular">Particular</option>
+                   <option value="empresa">Empresa</option>
+                </select>
+            </div>
+
+            <div class="contactForm">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="contactForm">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required>
+            </div> 
+
+            <div class="contactForm">
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+            </div>
+            <div class="contactForm">
+                <input type="submit" value="Enviar">
+            </div>
+
+        </form>
+      </div>
+    
+      <!--FOOTER-->
+      <div class="footer">
+        <div class="footerLogo">
+            <img src="../img/logosolopds.png" alt="Logo de la empresa">
+            <p>&copy; 2023 Solopods</p>
+        </div>
+        <div class="footerRedes">
+            <p>Síguenos en redes sociales:</p>
+            <a href="https://www.instagram.com/solopods_/" target="_blank">Instagram</a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footerInfo">
+            <p>Madrid</p>
+            <p>+34 666 666 666</p>
+            <p>solopods@gmail.com</p>
+        </div>
+    </div>
+</body>
+</html>
