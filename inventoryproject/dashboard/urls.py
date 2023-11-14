@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import generate_pdf
 
 urlpatterns = [
     path('dashboard/', views.index, name='dashboard-index'),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('product/delete/<int:pk>/', views.product_delete, name='dashboard-product-delete'),
     path('product/update/<int:pk>/', views.product_update, name='dashboard-product-update'),
     path('order/', views.order, name='dashboard-order'),
+    path('generate_pdf/', generate_pdf, name='generate_pdf'),
 ]

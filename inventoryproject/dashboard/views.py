@@ -5,8 +5,62 @@ from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.shortcuts import render
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from django.shortcuts import render
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image,  SimpleDocTemplate, Table, TableStyle, Image
+
 
 # Create your views here.
+
+def generate_pdf(request):
+    # Obtener los datos de la base de datos para el usuario actual
+    user_orders = Order.objects.filter(staff=request.user)
+
+    # Crear un objeto PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="orders.pdf"'
+
+    # Crear el objeto Canvas del PDF
+    p = canvas.Canvas(response)
+
+    logo_path = 'media/logos/1.png'  # Ruta a tu archivo de logo
+    p.drawImage(logo_path, 50, 750, width=100, height=100)  # Ajusta las coordenadas y dimensiones según sea necesario
+    p.setFont("Helvetica", 14)
+    p.drawCentredString(300, 800, "Factura del pedido")
+
+    # Espaciado después del encabezado
+    p.drawString(100, 710, "Productos seleccionados:")
+    p.drawString(100, 705, "-" * 80)
+
+    x_position = 100
+    y_position = 600
+
+    # Datos de la tabla
+    table_data = [['Order ID', 'Product']]
+    for order in user_orders:
+        table_data.append([str(order.id), order.product])
+
+    # Crear la tabla
+    table = Table(table_data, colWidths=[80, 200])
+    table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                               ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                               ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                               ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                               ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                               ('BACKGROUND', (0, 1), (-1, -1), colors.beige)]))
+
+    # Dibujar la tabla en el PDF
+    table.wrapOn(p, 200, 400)
+    table.drawOn(p, x_position, y_position)
+    p.save()
+    return response
 
 @login_required
 def index(request):

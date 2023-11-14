@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 
+
 # Create your views here.
 def register(request):
     if request.method == 'POST':
