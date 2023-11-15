@@ -23,6 +23,12 @@ def generate_pdf(request):
     # Obtener los datos de la base de datos para el usuario actual
     user_orders = Order.objects.filter(staff=request.user)
 
+    # Calcular la suma de order_quantity y el precio total
+    total_quantity = sum(order.order_quantity for order in user_orders)
+    static_price = 5  # Número estático para el precio por unidad
+    total_price = sum(order.order_quantity * static_price for order in user_orders)
+
+
     # Crear un objeto PDF
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="orders.pdf"'
@@ -39,16 +45,24 @@ def generate_pdf(request):
     p.drawString(100, 710, "Productos seleccionados:")
     p.drawString(100, 705, "-" * 80)
 
-    x_position = 100
+    # Calcular el ancho del documento
+    width, height = letter
+    table_width = 400  # Ancho deseado de la tabla
+
+    x_position = 55
     y_position = 600
 
     # Datos de la tabla
-    table_data = [['Order ID', 'Product']]
+    table_data = [['Order ID', 'Product','Category','Units','Price']]
     for order in user_orders:
-        table_data.append([str(order.id), order.product])
+        order_price = order.order_quantity * static_price  # Calcular el precio
+        table_data.append([str(order.id), order.product.name, order.product.category, order.order_quantity,order_price])
+
+    # Agregar la fila de suma al final de la tabla
+    table_data.append(['', '', 'TOTAL', total_quantity, total_price])
 
     # Crear la tabla
-    table = Table(table_data, colWidths=[80, 200])
+    table = Table(table_data, colWidths=[80, 100])
     table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
                                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
                                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -57,7 +71,7 @@ def generate_pdf(request):
                                ('BACKGROUND', (0, 1), (-1, -1), colors.beige)]))
 
     # Dibujar la tabla en el PDF
-    table.wrapOn(p, 200, 400)
+    table.wrapOn(p, table_width, 400)
     table.drawOn(p, x_position, y_position)
     p.save()
     return response
