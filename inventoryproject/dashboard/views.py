@@ -6,6 +6,7 @@ from .forms import ProductForm, OrderForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.shortcuts import render
+from datetime import datetime
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from django.shortcuts import render
@@ -28,6 +29,9 @@ def generate_pdf(request):
     static_price = 5  # Número estático para el precio por unidad
     total_price = sum(order.order_quantity * static_price for order in user_orders)
 
+    # Calcular el IVA (21%)
+    iva_rate = 0.21
+    iva_amount = total_price * iva_rate
 
     # Crear un objeto PDF
     response = HttpResponse(content_type='application/pdf')
@@ -38,28 +42,47 @@ def generate_pdf(request):
 
     logo_path = 'media/logos/1.png'  # Ruta a tu archivo de logo
     p.drawImage(logo_path, 50, 750, width=100, height=100)  # Ajusta las coordenadas y dimensiones según sea necesario
-    p.setFont("Helvetica", 14)
-    p.drawCentredString(300, 800, "Factura del pedido")
+    p.setFont("Helvetica", 20)
+    p.drawCentredString(300, 790, "FACTURA")
 
-    # Espaciado después del encabezado
-    p.drawString(100, 710, "Productos seleccionados:")
-    p.drawString(100, 705, "-" * 80)
+    # Datos de la empresa
+    p.setFont("Helvetica", 10)
+    p.drawString(55, 747, "Foodrifish Import - Export")
+    p.drawString(55, 735, "Avd. General Duque de")
+    p.drawString(55, 723, "Aveiro, 7 29140")
+    p.drawString(55, 711, "Malaga, España")
+    p.drawString(55, 699, "NIF: B42755314")
+    # Añadir la fecha actual a la factura
+    # Obtener la fecha actual
+    current_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    p.setFont("Helvetica", 10)
+    p.drawString(350, 747, f"Fecha de emisión: {current_date}")
 
     # Calcular el ancho del documento
     width, height = letter
     table_width = 400  # Ancho deseado de la tabla
 
     x_position = 55
-    y_position = 600
+    y_position = 500
 
     # Datos de la tabla
     table_data = [['Order ID', 'Product','Category','Units','Price']]
     for order in user_orders:
         order_price = order.order_quantity * static_price  # Calcular el precio
-        table_data.append([str(order.id), order.product.name, order.product.category, order.order_quantity,order_price])
+        table_data.append([str(order.id), order.product.name, order.product.category, order.order_quantity,f"{order_price:.2f} €"])
 
+    # Agregar separador entre productos y precio
+    table_data.append(['', '', '', '', ''])
     # Agregar la fila de suma al final de la tabla
-    table_data.append(['', '', 'TOTAL', total_quantity, total_price])
+    table_data.append(['', '', 'TOTAL', total_quantity, f"{total_price:.2f} €"])
+
+    # Agregar la fila de IVA a la tabla
+    table_data.append(['', '', '', 'IVA (21%)',  f"{iva_amount:.2f} €"])
+
+    # Agregar la fila de precio total con IVA a la tabla
+    total_price_with_iva = total_price + iva_amount
+    table_data.append(['', '', '', 'Precio Total con IVA', f"{total_price_with_iva:.2f} €"])
+
 
     # Crear la tabla
     table = Table(table_data, colWidths=[80, 100])
@@ -73,6 +96,22 @@ def generate_pdf(request):
     # Dibujar la tabla en el PDF
     table.wrapOn(p, table_width, 400)
     table.drawOn(p, x_position, y_position)
+
+    # Calcular la altura de la tabla
+    table_height = table.wrapOn(p, table_width, 400)
+
+    # Ajustar la posición del pie de página debajo de la tabla
+    footer_y_position = 300
+
+    # Añadir el pie de página
+    p.setFont("Helvetica", 10)
+    p.drawString(55, footer_y_position, "¡Gracias por tu compra! Procesaremos tu pedido una vez hayamos recibido el pago")
+
+    # Información de contacto
+    p.drawString(55, footer_y_position - 15, "Síguenos en Instagram: @solopods_")
+    p.drawString(55, footer_y_position - 30, "Correo Electrónico: iglobalstore00@gmail.com")
+    p.drawString(55, footer_y_position - 45, "Teléfono: +34 606656761")
+
     p.save()
     return response
 
