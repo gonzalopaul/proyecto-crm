@@ -1,6 +1,6 @@
 {% extends 'partials/base.html' %}
 {% block title %} Order Page {% endblock %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 {% include 'partials/topnav.html' %}
@@ -19,6 +19,7 @@
                             <th scope="col">Quantity</th>
                             <th scope="col">Order by</th>
                             <th scope="col">Date</th>
+                            <th scope="col">GO</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,13 @@
                             <td>{{ orders.order_quantity }}</td>
                             <td>{{ orders.staff.username }}</td>
                             <td>{{ orders.date }}</td>
+                            <td>
+                                {% if not orders.confirmed %}
+                                    <a class="btn btn-success btn-sm" href="{% url 'confirm-order' orders.id %}">Confirm</a>
+                                {% else %}
+                                    <p>Done</p>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

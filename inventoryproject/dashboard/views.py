@@ -5,17 +5,16 @@ from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.shortcuts import render
 from datetime import datetime
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
-from django.shortcuts import render
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Image,  SimpleDocTemplate, Table, TableStyle, Image
+from reportlab.platypus import Table, TableStyle, Image
+from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseBadRequest
 
 
 # Create your views here.
@@ -233,3 +232,29 @@ def order(request):
         'product_count': product_count,
     }
     return render(request, 'dashboard/order.html', context)
+
+@login_required
+def confirm_order(request, pk):
+    order = get_object_or_404(Order, id=pk)
+
+    if request.method == 'POST':
+        order.confirmed = True
+        order.save()
+
+        product = order.product
+        if order.order_quantity <= product.quantity:
+            product.quantity -= order.order_quantity
+            product.save()
+            messages.success(request, f'Order {order.id} has been confirmed successfully.')
+            return redirect('dashboard-order')
+        else:
+            return HttpResponseBadRequest("Not enough quantity in stock.")
+
+    elif request.method == 'GET':
+        # Aquí puedes manejar la lógica para mostrar detalles de la orden antes de confirmar
+        context = {
+            'order': order,
+        }
+        return render(request, 'dashboard/confirm_order.html', context)
+    else:
+        return HttpResponseBadRequest("Invalid request method")

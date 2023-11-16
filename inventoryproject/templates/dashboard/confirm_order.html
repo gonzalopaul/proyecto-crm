@@ -1,0 +1,17 @@
+<!-- confirm_order.html -->
+{% extends 'partials/base.html' %}
+{% block title %} Confirm Page {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>Confirm Order</h1>
+    <p>Order ID: {{ order.id }}</p>
+    <!-- Mostrar otros detalles de la orden según tu modelo -->
+
+    <form method="POST" action="{% url 'confirm-order' order.id %}">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-success" value="Confirm Order">
+        <p>Order ID: {{ order.product }}</p>
+    </form>
+{% endblock %}
+

@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 from .views import generate_pdf
 
+
 urlpatterns = [
     path('dashboard/', views.index, name='dashboard-index'),
     path('staff/', views.staff, name='dashboard-staff'),
@@ -12,4 +13,5 @@ urlpatterns = [
     path('product/update/<int:pk>/', views.product_update, name='dashboard-product-update'),
     path('order/', views.order, name='dashboard-order'),
     path('generate_pdf/', generate_pdf, name='generate_pdf'),
+    path('order/confirm/<int:pk>/', views.confirm_order, name='confirm-order'),
 ]
