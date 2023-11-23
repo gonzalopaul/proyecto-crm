@@ -29,7 +29,7 @@ def generate_pdf(request):
     total_price = sum(order.order_quantity * static_price for order in user_orders)
 
     # Calcular el IVA (21%)
-    iva_rate = 0.21
+    iva_rate = request.session.get('iva_rate', 0.21)
     iva_amount = total_price * iva_rate
 
     # Crear un objeto PDF
@@ -58,11 +58,10 @@ def generate_pdf(request):
     p.drawString(350, 747, f"Fecha de emisión: {current_date}")
 
     # Calcular el ancho del documento
-    width, height = letter
-    table_width = 400  # Ancho deseado de la tabla
+    table_width = 400
 
     x_position = 55
-    y_position = 500
+    y_position = 400
 
     # Datos de la tabla
     table_data = [['Order ID', 'Product','Category','Units','Price']]
@@ -95,9 +94,6 @@ def generate_pdf(request):
     # Dibujar la tabla en el PDF
     table.wrapOn(p, table_width, 400)
     table.drawOn(p, x_position, y_position)
-
-    # Calcular la altura de la tabla
-    table_height = table.wrapOn(p, table_width, 400)
 
     # Ajustar la posición del pie de página debajo de la tabla
     footer_y_position = 300
@@ -251,7 +247,6 @@ def confirm_order(request, pk):
             return HttpResponseBadRequest("Not enough quantity in stock.")
 
     elif request.method == 'GET':
-        # Aquí puedes manejar la lógica para mostrar detalles de la orden antes de confirmar
         context = {
             'order': order,
         }
