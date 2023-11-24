@@ -21,6 +21,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, null=True)
     category = models.CharField(max_length=20, choices=CATEGORY, null=True)
     quantity = models.PositiveIntegerField(null=True)
+    iva_rate = models.DecimalField(max_digits=5, decimal_places=2, null=True)
 
     class Meta:
         verbose_name_plural = 'Product'

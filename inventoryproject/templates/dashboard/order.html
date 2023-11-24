@@ -41,6 +41,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <form method="post" action="{% url 'update-iva-rate' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Change IVA Rate</button>
+                </form>
             </div>
         </div>
     </div>

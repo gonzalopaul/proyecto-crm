@@ -1,0 +1,41 @@
+{% extends 'partials/base.html' %}
+{% block title %} IVA RATE UPDATE {% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="update-iva-container">
+    <h2>Change IVA</h2>
+    <p class="subtitle">Filtered by category</p>
+
+    <form method="post" action="{% url 'update-iva-rate' %}" class="update-iva-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+
+<style>
+    .update-iva-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #000;
+        text-align: center;
+        background-color: aliceblue;
+    }
+
+    h2 {
+        color: #000;
+    }
+
+    .subtitle {
+        color: #666;
+    }
+
+    .update-iva-form {
+        margin-top: 20px;
+    }
+</style>
+
+{% endblock %}

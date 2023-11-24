@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Product, Order
-from .forms import ProductForm, OrderForm
+from .forms import ProductForm, OrderForm, ProductForm2
 from django.contrib.auth.models import User
 from django.contrib import messages
 from datetime import datetime
@@ -221,6 +221,7 @@ def order(request):
     orders_count = orders.count()
     workers_count = User.objects.all().count()
     product_count = Product.objects.all().count()
+
     context = {
         'orders': orders,
         'workers_count': workers_count,
@@ -228,6 +229,7 @@ def order(request):
         'product_count': product_count,
     }
     return render(request, 'dashboard/order.html', context)
+    
 
 @login_required
 def confirm_order(request, pk):
@@ -253,3 +255,16 @@ def confirm_order(request, pk):
         return render(request, 'dashboard/confirm_order.html', context)
     else:
         return HttpResponseBadRequest("Invalid request method")
+
+def update_iva_rate(request):
+    if request.method == 'POST':
+        form = ProductForm2(request.POST)
+        if form.is_valid():
+            category = form.cleaned_data['category']
+            iva_rate = form.cleaned_data['iva_rate']
+            Product.objects.filter(category=category).update(iva_rate=iva_rate)
+            return redirect('dashboard-order')  # Redirige a la página que desees después de guardar
+    else:
+        form = ProductForm2()
+
+    return render(request, 'dashboard/update_iva_rate.html', {'form': form})
