@@ -5,6 +5,7 @@ Repositorio dedicado a la elaboración de un Sistema de Gestión de Relaciones c
 
 (Admin) Nacho_Chinchu - chinchu
 (Admin) Gonzalo_Paul - Gonzalo00
+(Admin) Requejo_admin -reque12345678
 (Staff) Miriam_Jimenez - Bienvenido10
 (Staff) Enrique_Collado - Bienvenido10
 
@@ -13,6 +14,7 @@ Repositorio dedicado a la elaboración de un Sistema de Gestión de Relaciones c
 ```
 pip3 install django-crispy-forms
 pip3 install crispy-bootstrap4
+pip3 install reportlab
 python3 manage.py runserver
 python -m pip install Pillow
 ```
