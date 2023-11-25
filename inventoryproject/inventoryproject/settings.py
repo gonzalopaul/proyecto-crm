@@ -144,3 +144,14 @@ LOGIN_REDIRECT_URL = 'dashboard-index'
 LOGIN_URL = 'user-login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ 
+SESSION_COOKIE_SECURE = True 
+CSRF_COOKIE_SECURE = True 
+
+ 
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') 
+
+ 
