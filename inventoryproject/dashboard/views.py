@@ -268,3 +268,19 @@ def update_iva_rate(request):
         form = ProductForm2()
 
     return render(request, 'dashboard/update_iva_rate.html', {'form': form})
+
+def delete_order(request, pk):
+    order = get_object_or_404(Order, id=pk)
+
+    if request.method == 'POST':
+        # Eliminar el pedido y redirigir a la página deseada
+        order.delete()
+        messages.success(request, f'Order {pk} has been deleted successfully.')
+        return redirect('dashboard-order')
+    elif request.method == 'GET':
+        context = {
+            'order': order,
+        }
+        return render(request, 'dashboard/delete_order.html', context)
+    else:
+        return HttpResponseBadRequest("Invalid request method")

@@ -15,4 +15,5 @@ urlpatterns = [
     path('generate_pdf/', generate_pdf, name='generate_pdf'),
     path('order/confirm/<int:pk>/', views.confirm_order, name='confirm-order'),
     path('iva/', views.update_iva_rate, name='update-iva-rate'),
+    path('delete_order/<int:pk>/', views.delete_order, name='delete-order'),
 ]

@@ -16,6 +16,7 @@ class ProductForm2(forms.ModelForm):
     category_choices = [
         ('0% Nic 600 Puff', '0% Nic 600 Puff'),
         ('2% Nic 600 Puff', '2% Nic 600 Puff'),
+        ('5% Nic 600 Puff', '5% Nic 600 Puff'),
     ]
     category = forms.ChoiceField(choices=category_choices, required=False)
     iva_rate = forms.FloatField(required=True)

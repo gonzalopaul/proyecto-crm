@@ -20,6 +20,7 @@
                             <th scope="col">Order by</th>
                             <th scope="col">Date</th>
                             <th scope="col">GO</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,9 @@
                                 {% else %}
                                     <p>Done</p>
                                 {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="{% url 'delete-order' orders.id %}">Delete</a>
                             </td>
                         </tr>
                         {% endfor %}
