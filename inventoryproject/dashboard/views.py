@@ -29,8 +29,7 @@ def generate_pdf(request):
     total_price = sum(order.order_quantity * static_price for order in user_orders)
 
     # Calcular el IVA (21%)
-    iva_rate = request.session.get('iva_rate', 0.21)
-    iva_amount = total_price * iva_rate
+    total_iva = sum((order.order_quantity * static_price * ((order.product.iva_rate/100))) for order in user_orders)
 
     # Crear un objeto PDF
     response = HttpResponse(content_type='application/pdf')
@@ -60,30 +59,31 @@ def generate_pdf(request):
     # Calcular el ancho del documento
     table_width = 400
 
-    x_position = 55
-    y_position = 400
+    x_position = 40
+    y_position = 500
 
     # Datos de la tabla
-    table_data = [['Order ID', 'Product','Category','Units','Price']]
+    table_data = [['Order ID', 'Product','Category','Units','Price', 'IVA', 'Price with IVA']]
     for order in user_orders:
         order_price = order.order_quantity * static_price  # Calcular el precio
-        table_data.append([str(order.id), order.product.name, order.product.category, order.order_quantity,f"{order_price:.2f} €"])
+        order_price_iva = order_price * (1+((order.product.iva_rate)/100))
+        table_data.append([str(order.id), order.product.name, order.product.category, order.order_quantity,f"{order_price:.2f} €",f"{order.product.iva_rate:.2f} %",f"{order_price_iva:.2f} €" ])
 
     # Agregar separador entre productos y precio
     table_data.append(['', '', '', '', ''])
     # Agregar la fila de suma al final de la tabla
-    table_data.append(['', '', 'TOTAL', total_quantity, f"{total_price:.2f} €"])
+    table_data.append(['', '', '', '', 'TOTAL', f"{total_quantity:.2f} ud", f"{total_price:.2f} €"])
 
     # Agregar la fila de IVA a la tabla
-    table_data.append(['', '', '', 'IVA (21%)',  f"{iva_amount:.2f} €"])
+    table_data.append(['', '', '', '', 'IVA', '',  f"{total_iva:.2f} €"])
 
     # Agregar la fila de precio total con IVA a la tabla
-    total_price_with_iva = total_price + iva_amount
-    table_data.append(['', '', '', 'Precio Total con IVA', f"{total_price_with_iva:.2f} €"])
+    total_price_with_iva = total_price + total_iva
+    table_data.append(['', '', '', '', '', 'Total price w/ IVA', f"{total_price_with_iva:.2f} €"])
 
 
     # Crear la tabla
-    table = Table(table_data, colWidths=[80, 100])
+    table = Table(table_data, colWidths=[50, 80])
     table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
                                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
                                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
