@@ -49,11 +49,9 @@
                     </table>
                 </div>
                 <div>
-                    {% for order in orders %}
-                    {% if order.confirmed == 1 %}
-                    <a href="{% url 'generate_pdf' %}" class="btn btn-primary">Generate Invoice</a>
+                    {% if all_confirmed %}
+                        <a href="{% url 'generate_pdf' %}" class="btn btn-primary">Generate Invoice</a>
                     {% endif %}
-                    {% endfor %}
                 </div>
             </div>
         </div>

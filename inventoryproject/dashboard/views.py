@@ -59,7 +59,7 @@ def generate_pdf(request):
     # Calcular el ancho del documento
     table_width = 400
 
-    x_position = 40
+    x_position = 20
     y_position = 500
 
     # Datos de la tabla
@@ -83,7 +83,7 @@ def generate_pdf(request):
 
 
     # Crear la tabla
-    table = Table(table_data, colWidths=[50, 80])
+    table = Table(table_data, colWidths=[50, 85])
     table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
                                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
                                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -117,6 +117,7 @@ def index(request):
     orders_count = orders.count()
     product_count = products.count()
     workers_count = User.objects.all().count()
+    all_confirmed = all(order.confirmed for order in orders)
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -133,6 +134,7 @@ def index(request):
         'product_count': product_count,
         'workers_count': workers_count,
         'orders_count': orders_count,
+        'all_confirmed': all_confirmed
     }
     return render(request, 'dashboard/index.html', context)
 
@@ -221,12 +223,14 @@ def order(request):
     orders_count = orders.count()
     workers_count = User.objects.all().count()
     product_count = Product.objects.all().count()
+    all_confirmed = all(order.confirmed for order in orders)
 
     context = {
         'orders': orders,
         'workers_count': workers_count,
         'orders_count': orders_count,
         'product_count': product_count,
+        'all_confirmed': all_confirmed
     }
     return render(request, 'dashboard/order.html', context)
     
