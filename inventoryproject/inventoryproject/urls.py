@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from user import views as user_view
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.views import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +36,19 @@ urlpatterns = [
     path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(template_name='user/password_reset_done.html'), name='password_reset_done'),
     path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='user/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='user/password_reset_complete.html'), name='password_reset_complete'),
+    path('web/', TemplateView.as_view(template_name='index.html')),
+
+    # Páginas
+    path('web/colaboraciones/', TemplateView.as_view(template_name='paginas/colaboraciones.html')),
+    path('web/contacto/', TemplateView.as_view(template_name='paginas/contacto.html')),
+    path('web/productos/', TemplateView.as_view(template_name='paginas/productos.html')),
+    path('web/servicios/', TemplateView.as_view(template_name='paginas/servicios.html')),
+
+    # Rutas para archivos estáticos
+    path('css/<path:path>', serve, {'document_root': 'web/css'}),
+    path('favicon/<path:path>', serve, {'document_root': 'web/favicon'}),
+    path('image/<path:path>', serve, {'document_root': 'web/image'}),
+    path('js/<path:path>', serve, {'document_root': 'web/js'}),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
